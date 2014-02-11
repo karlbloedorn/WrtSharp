@@ -52,6 +52,36 @@ namespace WrtSharp
       return res.result;
     }
 
+    public async Task<List<DHCPLease>> DevicesInfo()
+    {
+        string leasesString = null;
+        var res = await rpc.Invoke<FileResult>("call", session, "file", "read", new { path = "/tmp/dhcp.leases", data = new { }});
+        if (res.code == 0)
+        {
+            leasesString = res.result.data;
+        }
+        else
+        {
+            throw new Exception("Failed to read lease file");
+        }
+        var lines = leasesString.Split( new []{  '\n'},StringSplitOptions.RemoveEmptyEntries);
+
+        var leases = lines.Select(x =>
+        {
+            var items = x.Split(' ');
+            return new DHCPLease
+            (
+               expires: Double.Parse(items[0]),
+               mac: items[1],
+               ip: items[2],
+               host: items[3],
+               client_identifier: items[4]
+            );
+        });
+        return leases.ToList();
+    }
+
+
     public async Task<SystemInfoResponse> SystemInfo()
     {
       var res = await rpc.Invoke<SystemInfoResponse>("call", session, "system", "info", new { });

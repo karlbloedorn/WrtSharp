@@ -36,6 +36,8 @@
     <Compile Include="Exceptions\RPCException.cs" />
     <Compile Include="Host.cs" />
     <Compile Include="JsonRPC.cs" />
+    <Compile Include="Models\DHCPLease.cs" />
+    <Compile Include="Models\FileResult.cs" />
     <Compile Include="Models\JsonRPCRequest.cs" />
     <Compile Include="Models\JsonRPCResponse.cs" />
     <Compile Include="Models\LoginResponse.cs" />

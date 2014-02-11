@@ -33,26 +33,6 @@ namespace WrtSharpTests
    
     }
 
-
-    [TestMethod]
-    public void TestGraph()
-    {
-      string json = File.ReadAllText("TestAssets/wirelessnetworks.json");
-      var networks = WirelessNetworks.Nearby(json).results;
-
-      string path =  @"D:\Test\graph.pdf";
-    
-      if(File.Exists(path))
-      {
-        File.Delete(path);
-      }
-
-      using (FileStream testfile = File.OpenWrite(path))
-      {
-         WirelessNetworks.Graph(networks, testfile);
-      }
-    }
-
     public static bool PublicInstancePropertiesEqual<T>(T self, T to, params string[] ignore) where T : class
     {
       if (self != null && to != null)
