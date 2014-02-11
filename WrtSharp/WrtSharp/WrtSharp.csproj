@@ -42,6 +42,7 @@
     <Compile Include="Models\JsonRPCResponse.cs" />
     <Compile Include="Models\LoginResponse.cs" />
     <Compile Include="Models\SystemBoardResponse.cs" />
+    <Compile Include="Models\UCIResponses.cs" />
     <Compile Include="Models\WirelessNetworkResponse.cs" />
     <Compile Include="Models\SystemInfoResponse.cs" />
     <Compile Include="WirelessNetworks.cs" />

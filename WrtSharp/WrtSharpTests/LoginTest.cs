@@ -133,5 +133,14 @@ namespace WrtSharpTests
             deviceInfoTask.Wait();
             Debug.WriteLine(deviceInfoTask.Result.ToList());
         }
+
+        [TestMethod]
+        public void APList()
+        {
+            var apListTask = testHost.WirelessAps();
+            apListTask.Wait();
+            Debug.WriteLine(apListTask.Result);
+        }
+
     }
 }

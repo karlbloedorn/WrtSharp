@@ -11,7 +11,10 @@ namespace WrtSharp.Models
     {
         public DHCPLease(Double expires, string ip, string mac, string host, string client_identifier)
         {
-            this.expires = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(expires);
+            if (expires != 0)
+            {
+                this.expires = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(expires);
+            }
             this.host = host  == "*" ? null : host;
             this.client_identifier = client_identifier == "*" ? null : client_identifier;
             this.ip = ip;
@@ -29,5 +32,12 @@ namespace WrtSharp.Models
                 return expires - DateTime.UtcNow;
             }
         }
+    }
+
+    public class UCIDHCPReservationResponse : UCIBlob
+    {
+        public string name { get; set; }
+        public string mac { get; set; }
+        public string ip { get; set; }
     }
 }

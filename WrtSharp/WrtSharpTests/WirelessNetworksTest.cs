@@ -11,28 +11,6 @@ namespace WrtSharpTests
   [TestClass]
   public class WirelessNetworksTest
   {
-    [TestMethod]
-    public void TestNearby()
-    {
-      var expectedNetwork = new Network{
-          bssid = "C0:3F:0E:7F:15:09",
-          channel = 5,
-          mode = "Master",
-          quality = 33,
-          quality_max = 70,
-          signal = -77,
-          ssid = "das Internet"
-      };
-
-      string json  = File.ReadAllText("TestAssets/wirelessnetworks.json");
-      var res = WirelessNetworks.Nearby(json);
-
-      Assert.IsNotNull(res, "Result object was null");
-      Assert.IsTrue(res.results.Any(), "There were no results");
-      Assert.IsTrue(res.results.Any(x => PublicInstancePropertiesEqual(x, expectedNetwork, "encryption")),"das Internet was not found or did not match");
-   
-    }
-
     public static bool PublicInstancePropertiesEqual<T>(T self, T to, params string[] ignore) where T : class
     {
       if (self != null && to != null)

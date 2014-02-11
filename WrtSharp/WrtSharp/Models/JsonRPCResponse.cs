@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 
 namespace WrtSharp.Models
 {
-  public class JsonRPCResponse<T>
-  {
-    public string jsonrpc { get; set; }
+    public class JSONRPCResponse<T>
+    {
+        public string jsonrpc { get; set; }
+        public T result { get; set; }
+        public string id { get; set; }
+    }
 
+  public class UbusRPCResponse<T> : JSONRPCResponse<T>
+  {
     [JsonProperty("result")]
     private JArray raw_result { get; set; }
-
-    public string id { get; set; }
 
     [JsonIgnore]
     public int code
@@ -29,7 +32,7 @@ namespace WrtSharp.Models
     }
 
     [JsonIgnore]
-    public T result
+    public new T result
     {
       get
       {
