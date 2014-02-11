@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>JsonRPC</id>
+    <version>1.0.1.0</version>
+    <title>JsonRPC</title>
+    <authors>RReverser</authors>
+    <owners>RReverser</owners>
+    <projectUrl>https://github.com/RReverser/JsonRPC</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>JsonRPC Portable Class Library</description>
+    <releaseNotes>First public release of my Portable Class Library for JSON-RPC client interaction.</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <language />
+    <tags>json rpc api client http portable</tags>
+    <dependencies>
+      <dependency id="Microsoft.Bcl.Async" version="1.0.16" />
+      <dependency id="Newtonsoft.Json" version="5.0.6" />
+    </dependencies>
+  </metadata>
+</package>
