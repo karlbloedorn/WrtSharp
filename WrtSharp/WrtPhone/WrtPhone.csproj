@@ -115,6 +115,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>

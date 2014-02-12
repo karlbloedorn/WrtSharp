@@ -8,6 +8,10 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WrtPhone.Resources;
+using System.Diagnostics;
+using WrtSharp;
+using System.Threading.Tasks;
+using WrtSharp.Models;
 
 namespace WrtPhone
 {
@@ -22,20 +26,33 @@ namespace WrtPhone
       //BuildLocalizedApplicationBar();
     }
 
-    // Sample code for building a localized ApplicationBar
-    //private void BuildLocalizedApplicationBar()
-    //{
-    //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-    //    ApplicationBar = new ApplicationBar();
+    private async void ConnectButtonTapped(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      Debug.WriteLine("" + usernameField.Text  + " " + passwordField.Password + " " + hostnameField.Text + " " + rememberField.IsChecked );
+      var host = new Host("http://"+hostnameField.Text + "/ubus");
 
-    //    // Create a new button and set the text value to the localized string from AppResources.
-    //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-    //    appBarButton.Text = AppResources.AppBarButtonText;
-    //    ApplicationBar.Buttons.Add(appBarButton);
+      bool success =  await host.Login(usernameField.Text, passwordField.Password);
+      if (success)
+      {
+        var start = DateTime.UtcNow;
+        var tasks = new List<Task< List<DHCPLease>>>();
+        int count = 10;
+        for( int i = 0; i < count; i++){
+          var d = host.DevicesInfo();
+          tasks.Add(d);
+        }
+        await Task.WhenAll(tasks.ToArray());
 
-    //    // Create a new menu item with the localized string from AppResources.
-    //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-    //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-    //}
+        var result = tasks[0].Result;
+
+        var end = DateTime.UtcNow;
+        double ms =  (end - start).TotalMilliseconds;
+        Debug.WriteLine("count: " + count + ", total "  + ms + " ms, average " + ms/(count*1.0) );
+      }
+      else
+      {
+        MessageBox.Show("failed to login" + " took: ");
+      }
+    }
   }
 }
